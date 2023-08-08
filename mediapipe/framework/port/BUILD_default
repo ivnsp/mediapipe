@@ -261,8 +261,8 @@ cc_library(
 )
 
 cc_library(
-    name = "opencv_photo",
-    hdrs = ["opencv_photo_inc.h"],
+    name = "opencv_highgui",
+    hdrs = ["opencv_highgui_inc.h"],
     deps = [
         ":opencv_core",
         "//third_party:opencv",
@@ -291,15 +291,6 @@ cc_library(
 cc_library(
     name = "opencv_calib3d",
     hdrs = ["opencv_calib3d_inc.h"],
-    deps = [
-        ":opencv_core",
-        "//third_party:opencv",
-    ],
-)
-
-cc_library(
-    name = "opencv_highgui",
-    hdrs = ["opencv_highgui_inc.h"],
     deps = [
         ":opencv_core",
         "//third_party:opencv",
@@ -418,13 +409,9 @@ cc_library(
     name = "threadpool",
     hdrs = ["threadpool.h"],
     deps = select({
-        "//conditions:default": [":threadpool_impl_default_to_google",
-				"//mediapipe/framework/deps:image_resizer",
-				"//mediapipe/framework/port:opencv_core",],
+        "//conditions:default": [":threadpool_impl_default_to_google"],
         "//mediapipe:android": [":threadpool_impl_default_to_mediapipe"],
-        "//mediapipe:apple": [":threadpool_impl_default_to_mediapipe",
-				"//mediapipe/framework/port:opencv_core",
-				"//mediapipe/framework/deps:image_resizer",],
+        "//mediapipe:apple": [":threadpool_impl_default_to_mediapipe"],
     }),
 )
 
